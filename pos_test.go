@@ -10,7 +10,8 @@ func TestOnBarcodeOutputsAndReturnsMatchedBarcodes(t *testing.T) {
 	testCases := []struct {
 		name, barcode, expectedPrice string
 	}{
-		{name: "Twelve Zeros", barcode: "000000000000", expectedPrice: "$0.00"},
+		{name: "Twelve Zeros with new line", barcode: "000000000000\n", expectedPrice: "$0.00"},
+		{name: "Number with new line and return", barcode: "1234567890\n\r", expectedPrice: "$1.00"},
 	}
 
 	for _, tc := range testCases {
@@ -27,7 +28,7 @@ func TestOnBarcodeSetsErrorsForUnmatchedBarcodes(t *testing.T) {
 	testCases := []struct {
 		name, barcode, expectedPrice string
 	}{
-		{name: "Alpha", barcode: "alpha"},
+		{name: "Unmatched alpha", barcode: "alpha"},
 	}
 
 	for _, tc := range testCases {

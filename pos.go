@@ -1,18 +1,23 @@
 package pos
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 var itemCollection = map[string]string{
 	"000000000000": "$0.00",
+	"1234567890":   "$1.00",
 }
 var lastPriceOutput string
 var lastErrorMessage string
 
 func onBarcode(barcode string) {
-	pricer(barcode)
+	pricer(strings.TrimSpace(barcode))
 }
 
 func pricer(barcode string) {
+	fmt.Println(barcode)
 	price := itemCollection[barcode]
 	if price != "" {
 		fmt.Println(price)
