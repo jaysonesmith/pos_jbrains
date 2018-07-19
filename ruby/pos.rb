@@ -8,5 +8,10 @@ class Pos
 
     def barcode(barcode_input)
         @message = @product_store[barcode_input]
+        outputMessage(@message)
+    end
+
+    def outputMessage(message)
+        puts message
     end
 end
