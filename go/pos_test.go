@@ -6,13 +6,13 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestOnBarcodeOutputsAndReturnsMatchedBarcodes(t *testing.T) {
+func TestOnBarcode(t *testing.T) {
 	testCases := []struct {
 		name, barcode, expectedMessage string
 	}{
-		{name: "Twelve Zeros with new line", barcode: "000000000000\n", expectedMessage: "$0.00"},
+		{name: "Twelve Zeros with new line", barcode: "000000000000\n\r", expectedMessage: "$0.00"},
 		{name: "Number with new line and return", barcode: "1234567890\n\r", expectedMessage: "$1.00"},
-		{name: "Unmatched alpha", barcode: "alpha", expectedMessage: "Unable to locate price for barcode"},
+		{name: "Unmatched alpha", barcode: "alpha\n\r", expectedMessage: "Unable to locate price for barcode"},
 	}
 
 	for _, tc := range testCases {
