@@ -5,36 +5,36 @@ import (
 	"strings"
 )
 
-var lastPriceOutput string
-var lastErrorMessage string
+var message string
 var itemCollection = map[string]string{
 	"000000000000": "$0.00",
 	"1234567890":   "$1.00",
 }
 
-// no return value
 func onBarcode(barcode string) {
-	pricer(strings.TrimSpace(barcode))
+	processor(strings.TrimSpace(barcode))
+}
+
+func processor(barcode string) {
+	pricer(barcode)
+	outputMessage(message)
 }
 
 func pricer(barcode string) {
-	price := itemCollection[barcode]
-	if price != "" {
-		// printing price as stand in for output
-		// to device I don't have
-		fmt.Println(price)
-		lastPriceOutput = price
-	} else {
-		error := "Unable to locate price for barcode"
-		fmt.Println(error)
-		lastErrorMessage = error
+	if price, ok := itemCollection[barcode]; ok {
+		message = price
+		return
 	}
+
+	message = "Unable to locate price for barcode"
 }
 
-func lastPrice() string {
-	return lastPriceOutput
+func outputMessage(message string) {
+	// output to device/screen
+	// or just print it since
+	fmt.Println(message)
 }
 
-func errorMessage() string {
-	return lastErrorMessage
+func lastMessageSent() string {
+	return message
 }
