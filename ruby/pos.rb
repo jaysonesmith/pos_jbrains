@@ -7,7 +7,7 @@ class Pos
     end
 
     def barcode(barcode_input)
-        @message = @product_store[barcode_input]
+        @message = @product_store[barcode_input.strip!]
         outputMessage(@message)
     end
 
