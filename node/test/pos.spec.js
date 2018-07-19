@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 
 describe("pos", () => {
   it("returns a price if a matching barcode is found", () => {
-    onBarcode("1234567890");
+    onBarcode("1234567890\n\r");
     expect(lastMessageSent()).to.equal("$1.00")
   });
 });
