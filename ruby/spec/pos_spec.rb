@@ -1,5 +1,5 @@
 require 'rspec'
-require './pos'
+require './lib/pos'
 
 describe Pos do
     describe '.barcode' do
