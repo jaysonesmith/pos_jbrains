@@ -7,7 +7,10 @@ class Pos
     end
 
     def barcode(barcode_input)
-        @message = @product_store[barcode_input.strip!]
+        price = @product_store.dig(barcode_input.strip!)
+        
+        @message = price || 'Unable to locate price for barcode'
+
         outputMessage(@message)
     end
 
